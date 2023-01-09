@@ -3,6 +3,7 @@ package com.xx.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -58,6 +59,7 @@ public class DateTimeUtil {
 
     /**
      * 获取当前时间 yyyy-MM-dd HH:mm:ss
+     *
      * @return 当前时间字符串
      */
     public static String nowTime() {
@@ -66,6 +68,7 @@ public class DateTimeUtil {
 
     /**
      * 获取当前时间 根据传入的格式
+     *
      * @param pattern 格式化的格式
      * @return 当前时间字符串
      */
@@ -75,6 +78,7 @@ public class DateTimeUtil {
 
     /**
      * 根据传入的格式格式化日期
+     *
      * @param pattern 日期格式
      * @return
      */
@@ -616,7 +620,7 @@ public class DateTimeUtil {
 
 
     public static String format(Date date) {
-        return format(date,DATE_FORMAT_DATE_TIME);
+        return format(date, DATE_FORMAT_DATE_TIME);
     }
 
     public static String format(Date date, String pattern) {
@@ -997,12 +1001,12 @@ public class DateTimeUtil {
         calend2.setTime(d2);
         int year = (calend1.get(Calendar.YEAR) - calend2.get(Calendar.YEAR)) * 12;
         int month = calend1.get(Calendar.MONTH) - calend2.get(Calendar.MONTH);
-        month =Math.abs(year + month);
-        return month/12;
+        month = Math.abs(year + month);
+        return month / 12;
     }
 
 
-        /**
+    /**
      * 获取两个时间的相差月数
      *
      * @param d1
@@ -1023,6 +1027,7 @@ public class DateTimeUtil {
 
     /**
      * 获取两个日期相差分钟
+     *
      * @param d1
      * @param d2
      * @return
@@ -1164,18 +1169,146 @@ public class DateTimeUtil {
 
     /**
      * 获取今年天数
+     *
      * @return
      */
-    public static int getDaysOfThisYear(){
+    public static int getDaysOfThisYear() {
         return LocalDate.now().lengthOfYear();
+    }
+
+    /**
+     * 获取出生日期
+     *
+     * @return 返回字符串类型
+     */
+    public static String getBirthForIdCard(String idCard) {
+        if (idCard.length() != 18 && idCard.length() != 15) {
+            return "请输入正确的身份证号码";
+        }
+        if (idCard.length() == 18) {
+            // 得到年份
+            String year = idCard.substring(6).substring(0, 4);
+            // 得到月份
+            String month = idCard.substring(10).substring(0, 2);
+            // 得到日
+            String day = idCard.substring(12).substring(0, 2);
+            return (year + "-" + month + "-" + day);
+        } else if (idCard.length() == 15) {
+            // 年份
+            String year = "19" + idCard.substring(6, 8);
+            // 月份
+            String month = idCard.substring(8, 10);
+            // 得到日
+            String day = idCard.substring(10, 12);
+            return (year + "-" + month + "-" + day);
+        }
+        return null;
+    }
+
+    /**
+     * 获取出生日期
+     *
+     * @return 返回日期格式
+     */
+    public static Date getBirthDayForIdCard(String idCard) {
+        Date birth = null;
+        if (idCard.length() == 18) {
+            // 得到年份
+            String year = idCard.substring(6).substring(0, 4);
+            // 得到月份
+            String month = idCard.substring(10).substring(0, 2);
+            // 得到日
+            String day = idCard.substring(12).substring(0, 2);
+            birth = parseToDate(year + "-" + month + "-" + day, DATE_FORMAT_DATE);
+        } else if (idCard.length() == 15) {
+            // 年份
+            String year = "19" + idCard.substring(6, 8);
+            // 月份
+            String month = idCard.substring(8, 10);
+            // 得到日
+            String day = idCard.substring(10, 12);
+            birth = parseToDate(year + "-" + month + "-" + day, DATE_FORMAT_DATE);
+        }
+        return birth;
+    }
+
+    /**
+     * 获取性别
+     * 0=未知的性别,9=未说明的性别,2=女性,1=男性
+     *
+     * @return int
+     */
+    public static int getSexFromIdCard(String idCard) {
+        int sex = 9;
+        // 身份证号码为空
+        if (idCard == "" || idCard.length() <= 0) {
+            return sex = 0;
+        }
+        if (idCard.length() == 18) {
+            // 判断性别
+            if (Integer.parseInt(idCard.substring(16).substring(0, 1)) % 2 == 0) {
+                // 女
+                sex = 2;
+            } else {
+                // 男
+                sex = 1;
+            }
+        } else if (idCard.length() == 15) {
+            // 用户的性别
+            String usex = idCard.substring(14, 15);
+            if (Integer.parseInt(usex) % 2 == 0) {
+                // 女
+                sex = 2;
+            } else {
+                // 男
+                sex = 1;
+            }
+        }
+        return sex;
+    }
+
+    /**
+     * 根据身份证的号码算出当前身份证持有者的年龄
+     *
+     * @param
+     * @return -1(表示异常) 0 (身份证号码为空)
+     * @throws Exception
+     */
+    public static int getAgeForIdCard(String idcard) {
+        try {
+            int age = 0;
+            if (ValidationUtil.isEmpty(idcard)) {
+                return age;
+            }
+
+            String birth = "";
+            if (idcard.length() == 18) {
+                birth = idcard.substring(6, 14);
+            } else if (idcard.length() == 15) {
+                birth = "19" + idcard.substring(6, 12);
+            }
+
+            int year = Integer.valueOf(birth.substring(0, 4));
+            int month = Integer.valueOf(birth.substring(4, 6));
+            int day = Integer.valueOf(birth.substring(6));
+            Calendar cal = Calendar.getInstance();
+            age = cal.get(Calendar.YEAR) - year;
+            //周岁计算
+            if (cal.get(Calendar.MONTH) < (month - 1) || (cal.get(Calendar.MONTH) == (month - 1) && cal.get(Calendar.DATE) < day)) {
+                age--;
+            }
+            return age;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return -1;
     }
 
 
     public static void main(String[] args) {
-       /* Date date = DateTimeUtil.parseToDate("2022-03-16");
-        System.out.println(date);
-        String format = DateTimeUtil.format(date, DateTimeUtil.DATE_FORMAT_DATE_TIME);
-        System.out.println(format);*/
-        System.out.println(getDaysOfThisYear());
+        System.out.println(getBirthForIdCard("42102319960903571X"));
+        System.out.println(getBirthDayForIdCard("42102319960903571X"));
+        System.out.println(getAgeForIdCard("42102319960903571X"));
+        System.out.println(getSexFromIdCard("42102319960903571X"));
     }
 }
