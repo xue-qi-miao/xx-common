@@ -1310,5 +1310,6 @@ public class DateTimeUtil {
         System.out.println(getBirthDayForIdCard("42102319960903571X"));
         System.out.println(getAgeForIdCard("42102319960903571X"));
         System.out.println(getSexFromIdCard("42102319960903571X"));
+        System.out.println(getSexFromIdCard("42102319960903571X"));
     }
 }
