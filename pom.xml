@@ -11,25 +11,25 @@
     <description>小薛工具包</description>
     <groupId>com.xx</groupId>
     <artifactId>xx-common</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <properties>
-        <jdkVersion>1.8</jdkVersion>
-        <jdkVersion.test>1.8</jdkVersion.test>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <jdkVersion>17</jdkVersion>
+        <jdkVersion.test>17</jdkVersion.test>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.24</lombok.version>
         <hutool.version>5.8.10</hutool.version>
-        <swagger-annotations.version>1.6.8</swagger-annotations.version>
+        <swagger-annotations.version>2.2.10</swagger-annotations.version>
         <json-schema-validator.version>4.3.0</json-schema-validator.version>
         <fastjson.version>1.2.83</fastjson.version>
         <json-lib.version>2.4</json-lib.version>
-        <spring-beans.version>5.3.19</spring-beans.version>
+        <spring-beans.version>6.0.9</spring-beans.version>
         <log4j.version>1.2.17</log4j.version>
         <slf4j-log4j12.version>1.7.2</slf4j-log4j12.version>
         <servlet-api.version>2.5</servlet-api.version>
-        <mybatis-plus-annotation.version>3.5.1</mybatis-plus-annotation.version>
+        <mybatis-plus-annotation.version>3.5.3</mybatis-plus-annotation.version>
     </properties>
 
     <build>

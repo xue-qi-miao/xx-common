@@ -2,7 +2,7 @@ package com.xx.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xx.utils.ValidationUtil;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,25 +15,25 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultData<T> implements Serializable {
 
-    @ApiModelProperty("是否正常返回")
+    @Schema(description = "是否正常返回")
     private boolean success;
 
-    @ApiModelProperty("返回数据")
+    @Schema(description = "返回数据")
     private T data;
 
-    @ApiModelProperty("响应错误信息")
+    @Schema(description = "响应错误信息")
     private String error;
 
-    @ApiModelProperty("返回码：200为成功")
+    @Schema(description = "返回码：200为成功")
     private int code = ResultCodeEnum.REQUEST_SUCCESS.getCode();
 
-    @ApiModelProperty("异常信息")
+    @Schema(description = "异常信息")
     private String msg;
 
-    @ApiModelProperty("当前时间戳")
+    @Schema(description = "当前时间戳")
     private Long timestamp = (new Date()).getTime();
 
-    @ApiModelProperty("分页信息")
+    @Schema(description = "分页信息")
     private PageData pageData;
 
     public ResultData() {
