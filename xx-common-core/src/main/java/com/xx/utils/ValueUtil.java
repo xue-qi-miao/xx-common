@@ -21,7 +21,7 @@ public class ValueUtil {
     private static char asterisk = '.';
     private static String separator = "\\.";
     public static final String JAVA_MODEL_PREFIX = "com.xx";
-    private static List<String> REC_LOWER_FIELDS = new ArrayList<String>();
+    private static List<String> REC_LOWER_FIELDS = new ArrayList<>();
 
     static {
         REC_LOWER_FIELDS.add("createBy");

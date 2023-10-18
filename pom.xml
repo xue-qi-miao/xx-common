@@ -11,7 +11,7 @@
     <description>小薛工具包</description>
     <groupId>com.xx</groupId>
     <artifactId>xx-common</artifactId>
-    <version>1.2</version>
+    <version>1.3.1</version>
 
     <properties>
         <jdkVersion>17</jdkVersion>
