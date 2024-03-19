@@ -1,8 +1,6 @@
 package com.xx.common;
 
 
-import java.math.BigDecimal;
-
 /**
  * @Description: 通用常量
  * @author: xueqimiao
