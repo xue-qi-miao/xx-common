@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 接口返回数据格式
  *
- * @author: mapleleaf
+ * @author: xueqimiao
  * @email jeecgos@163.com
  * @date 2019年1月19日
  */

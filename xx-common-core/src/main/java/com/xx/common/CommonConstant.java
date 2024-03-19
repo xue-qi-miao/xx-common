@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 /**
  * @Description: 通用常量
- * @author: mapleleaf
+ * @author: xueqimiao
  */
 public interface CommonConstant {
 
